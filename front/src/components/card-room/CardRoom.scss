@@ -1,0 +1,49 @@
+.card-room{
+    display: flex;
+    width: 8rem;
+    min-height: 10rem;
+    padding: 0.5rem;
+    box-shadow: 2px 2px #b6b6b6;
+    &:hover{
+      cursor: pointer
+      }
+    &:not(:last-child){
+      margin-right: .625rem
+    }
+    &-img{
+      &-link{
+        text-align: center;
+      }
+      &-top{
+        height: 6rem;
+        width: 5rem!important;
+        &.loft{
+          width: 6rem!important;
+        }
+      }
+    }
+    &-title{
+      font-size: 1rem!important;
+
+      }
+    &-body{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex: 1;
+      &-description{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex: 1;
+      }
+      &-location{
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+    }
+}
+.col-6{
+  padding: 0!important;
+  }

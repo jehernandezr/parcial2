@@ -4,6 +4,7 @@ import "./Navbar.scss";
 import { FormattedMessage } from "react-intl";
 
 export const Navbar = ({ setLanguage }) => {
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -29,7 +30,8 @@ export const Navbar = ({ setLanguage }) => {
               </Link>
             </div>
             <div className="navbar-nav-controls">
-             {/** here lang selector */  }
+             {
+               <button onClick={true}>es</button>}
             </div>
           </div>
         </div>

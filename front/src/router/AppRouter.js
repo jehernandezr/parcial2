@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomesList } from "../pages/homes-list/HomesList";
+import { HomeDetail } from "../pages/home-detail/HomeDetail";
 import { Navbar } from "../components/nav/Navbar";
 import { IntlProvider } from "react-intl";
 import { LOCALES } from "../i18n/locales";
@@ -19,6 +20,9 @@ export const AppRouter = () => {
           </Route>
           <Route exact path="/homes">
             <HomesList />
+          </Route>
+          <Route exact path="/homes/:id">
+            <HomeDetail />
           </Route>
         </Switch>
       </Router>
