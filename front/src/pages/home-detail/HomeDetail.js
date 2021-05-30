@@ -7,16 +7,17 @@ import { useParams } from "react-router"
 import { Table } from 'react-bootstrap';
 import { FormattedMessage } from "react-intl";
 import {Chartpie} from '../../components/pie/Chartpie';
-import {Toast} from 'react-bootstrap';
+import { Notification, notify } from "../../components/notification/Notification";
+
 export const HomeDetail = () => {
   const [homeDetail, setHomeDetail] = useState([]);
-  const [showA, setShowA] = useState(true);
   const {id} =useParams();
   const [selectedDevices, setSelectedDevices] = useState(null);
-  const toggleShowA = () => setShowA(!showA);
+  
+  
   useEffect(() => {
     if(!navigator.onLine){
-      
+      notify();
       if(localStorage.getItem("homeDetail") === "") {
         setHomeDetail("Loading...")
       } else {
@@ -33,7 +34,6 @@ export const HomeDetail = () => {
 
       }
   } else {
-
     getHomeById(id).then((data) => {setHomeDetail(data)
         localStorage.setItem("homeDetail", JSON.stringify(data));
       });
@@ -62,21 +62,10 @@ export const HomeDetail = () => {
         {
           homeDetail && homeDetail.rooms?  <Chartpie rooms={homeDetail.rooms} />: <></>
         }
-     
+        <Notification/>
+        <div>
       </div>
-
-      <Toast show={showA} onClose={toggleShowA}>
-          <Toast.Header>
-            <img
-              src="../../public/warn.png"
-              className="rounded mr-2"
-              alt=""
-            />
-            <strong className="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
+      </div>
     </div>
   );
 };
@@ -115,5 +104,3 @@ const TableDevice =({devs})=> {
   </div>
   );
 }
-
-

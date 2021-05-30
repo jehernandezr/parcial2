@@ -3,12 +3,14 @@ import "./HomesList.scss";
 import { getHomes } from "../../services/utils";
 import { Card } from "../../components/card/Card";
 import { FormattedMessage } from "react-intl";
+import { Notification, notify } from "../../components/notification/Notification";
 export const HomesList = () => {
   const [homes, setHomes] = useState([]);
 
   useEffect(() => {
 
     if(!navigator.onLine){
+      notify();
       if(localStorage.getItem("houses") === "") {
         setHomes("Loading...")
       } else {
@@ -31,6 +33,7 @@ export const HomesList = () => {
      {homes && homes.map((home)=> <Card key={home.id} id={home.id} type={home.type} 
       name={home.name} address={home.address}/>)}
      </div>
+     <Notification/>
     </div>
   );
 };
