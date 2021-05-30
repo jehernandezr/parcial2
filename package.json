@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start-prod": "cd front && npm run build && cd .. && npm start"
+    "start-prod": "cd front && npm i && npm run build && cd .. && npm start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,5 +20,8 @@
     "nodemon": "^2.0.7",
     "react-intl": "^5.17.4",
     "uuid": "^8.3.2"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
