@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./HomesList.scss";
 import { getHomes } from "../../services/utils";
 import { Card } from "../../components/card/Card";
+import { FormattedMessage } from "react-intl";
 export const HomesList = () => {
   const [homes, setHomes] = useState([]);
 
@@ -23,7 +24,7 @@ export const HomesList = () => {
   return (
     <div className="container home">
       <h1>
-        Mis espacios
+      <FormattedMessage id="spaces" />
       </h1>
 
      <div className="list-homes">

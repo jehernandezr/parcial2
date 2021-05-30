@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./HomesDetail.scss";
+import { v1 as uuid } from 'uuid';
 import { getHomeById } from "../../services/utils";
 import { CardRoom } from "../../components/card-room/CardRoom";
 import { useParams } from "react-router"
 import { Table } from 'react-bootstrap';
+import { FormattedMessage } from "react-intl";
+import {Chartpie} from '../../components/pie/Chartpie';
+import {Toast} from 'react-bootstrap';
 export const HomeDetail = () => {
   const [homeDetail, setHomeDetail] = useState([]);
+  const [showA, setShowA] = useState(true);
   const {id} =useParams();
   const [selectedDevices, setSelectedDevices] = useState(null);
+  const toggleShowA = () => setShowA(!showA);
   useEffect(() => {
-
     if(!navigator.onLine){
+      
       if(localStorage.getItem("homeDetail") === "") {
         setHomeDetail("Loading...")
       } else {
@@ -27,6 +33,7 @@ export const HomeDetail = () => {
 
       }
   } else {
+
     getHomeById(id).then((data) => {setHomeDetail(data)
         localStorage.setItem("homeDetail", JSON.stringify(data));
       });
@@ -39,7 +46,7 @@ export const HomeDetail = () => {
   return (
     <div className="container home">
       <h1>
-        Mis Habitaciones
+      <FormattedMessage id="myRooms" />
       </h1>
      <div className="row">
        <div className="col-6">
@@ -49,9 +56,27 @@ export const HomeDetail = () => {
         name={room.name}  devs={room.devices} setSelectedDevices={setSelectedDevices}/>)}
          </div>
        </div>
-       {selectedDevices ? <TableDevice key={homeDetail.rooms} devs={selectedDevices} />: <div className="col-6">Selecciona habitacion para ver dispositivos</div> }
-
+       {selectedDevices ? <TableDevice key={uuid()} devs={selectedDevices} />: <div className="col-6"><FormattedMessage id="seedevices" /></div> }
      </div>
+      <div className="row">
+        {
+          homeDetail && homeDetail.rooms?  <Chartpie rooms={homeDetail.rooms} />: <></>
+        }
+     
+      </div>
+
+      <Toast show={showA} onClose={toggleShowA}>
+          <Toast.Header>
+            <img
+              src="../../public/warn.png"
+              className="rounded mr-2"
+              alt=""
+            />
+            <strong className="mr-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
     </div>
   );
 };
@@ -70,13 +95,13 @@ const TableDevice =({devs})=> {
       <tr>
         <th>#</th>
         <th>ID</th>
-        <th>Device</th>
-        <th>Value</th>
+        <th><FormattedMessage id="device" /></th>
+        <th><FormattedMessage id="valueDevice" /></th>
       </tr>
     </thead>
     <tbody>
      {devicesDetail.map((d, index)=>{ return (
-      <tr key ={d.id}>
+      <tr key ={uuid()}>
       <td>{index+1}</td>
        <td>{d.id}</td>
        <td>{d.name}</td>
@@ -90,3 +115,5 @@ const TableDevice =({devs})=> {
   </div>
   );
 }
+
+

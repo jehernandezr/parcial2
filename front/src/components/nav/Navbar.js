@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
+import { LOCALES } from "../../i18n/locales";
 import { FormattedMessage } from "react-intl";
-
+import {Dropdown} from 'react-bootstrap';
 export const Navbar = ({ setLanguage }) => {
 
   return (
@@ -29,10 +30,16 @@ export const Navbar = ({ setLanguage }) => {
                 <FormattedMessage id="spaces" />
               </Link>
             </div>
-            <div className="navbar-nav-controls">
-             {
-               <button onClick={true}>es</button>}
-            </div>
+              <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              <FormattedMessage id="language" />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item  onClick={()=> setLanguage(LOCALES.SPANISH)} href=""><FormattedMessage id="spanish" /></Dropdown.Item>
+                <Dropdown.Item onClick={()=> setLanguage(LOCALES.ENGLISH)} href=""><FormattedMessage id="english" /></Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
       </div>
